@@ -141,19 +141,16 @@ class HomePage extends StatelessWidget {
     final size = MediaQuery.of(context).size;
 
     return Container(
-      // padding: EdgeInsets.all(2.0),
-      //width: double.infinity,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.vertical(top: Radius.circular(10.0)),
           color: Colors.white),
-      //padding: EdgeInsets.symmetric(horizontal: 50.0),
       height: size.height * 0.1,
       child: Material(
         color: Colors.transparent,
         borderOnForeground: false,
         child: InkWell(
           splashColor: pedido.color.withAlpha(100),
-          onTap: () {},
+          onTap: () {Navigator.pushNamed(context, 'messages');},
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
@@ -196,35 +193,35 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  Widget _crearLista(BuildContext context) {
-    return ListView.separated(
-      padding: const EdgeInsets.symmetric(horizontal: 8.0),
-      itemCount: messages.length,
-      itemBuilder: (BuildContext context, int index) {
-        return Material(
-          color: Colors.transparent,
-          child: ListTile(
-            title: Text('Entry ${messages[index].title}'),
-            subtitle: Text(messages[index].subTitle),
-            trailing:
-                Icon(Icons.keyboard_arrow_right, color: messages[index].color),
-            leading: ClipRRect(
-                borderRadius: BorderRadius.circular(10.0),
-                child: Image(
-                  height: 40.0,
-                  width: 40.0,
-                  image: AssetImage(messages[index].imageType),
-                )),
-            onTap: () {
-              print(messages[index].message);
-            },
-          ),
-        );
-      },
-      separatorBuilder: (BuildContext context, int index) => Divider(
-        color: Colors.transparent,
-        height: 0.0,
-      ),
-    );
-  }
+  // Widget _crearLista(BuildContext context) {
+  //   return ListView.separated(
+  //     padding: const EdgeInsets.symmetric(horizontal: 8.0),
+  //     itemCount: messages.length,
+  //     itemBuilder: (BuildContext context, int index) {
+  //       return Material(
+  //         color: Colors.transparent,
+  //         child: ListTile(
+  //           title: Text('Entry ${messages[index].title}'),
+  //           subtitle: Text(messages[index].subTitle),
+  //           trailing:
+  //               Icon(Icons.keyboard_arrow_right, color: messages[index].color),
+  //           leading: ClipRRect(
+  //               borderRadius: BorderRadius.circular(10.0),
+  //               child: Image(
+  //                 height: 40.0,
+  //                 width: 40.0,
+  //                 image: AssetImage(messages[index].imageType),
+  //               )),
+  //           onTap: () {
+  //             print(messages[index].message);
+  //           },
+  //         ),
+  //       );
+  //     },
+  //     separatorBuilder: (BuildContext context, int index) => Divider(
+  //       color: Colors.transparent,
+  //       height: 0.0,
+  //     ),
+  //   );
+  // }
 }

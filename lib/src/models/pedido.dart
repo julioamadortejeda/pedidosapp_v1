@@ -18,8 +18,8 @@ class Pedido {
       estatus  ='Abierto';
 
       background = LinearGradient(
-        begin: Alignment.topRight,
-        end: Alignment.bottomLeft,
+        begin: Alignment.topCenter,
+        end: Alignment.bottomCenter,
         colors: [
           Colors.green,
           Color.fromRGBO(100, 224, 99, 1.0)
@@ -32,8 +32,8 @@ class Pedido {
       estatus = 'Cerrado';
 
       background = LinearGradient(
-        begin: Alignment.topRight,
-        end: Alignment.bottomLeft,
+        begin: Alignment.topCenter,
+        end: Alignment.bottomCenter,
         colors: [
           Colors.red,
           Color.fromRGBO(255, 87, 51, 1.0)
