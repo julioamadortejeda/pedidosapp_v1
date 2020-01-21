@@ -75,7 +75,7 @@ class HomePage extends StatelessWidget {
         shape:
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
         child: InkWell(
-          splashColor: pedido.color.withAlpha(255),
+          splashColor: pedido.color.withAlpha(100),
           onTap: () {},
           child: Column(children: <Widget>[
             Container(
@@ -152,16 +152,44 @@ class HomePage extends StatelessWidget {
         color: Colors.transparent,
         borderOnForeground: false,
         child: InkWell(
-          splashColor: pedido.color,
+          splashColor: pedido.color.withAlpha(100),
           onTap: () {},
-          child: Center(
-            child: Text(
-              'Mensajes',
-              style: TextStyle(
-                  fontSize: 30.0,
-                  color: pedido.color,
-                  fontWeight: FontWeight.bold),
-            ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              //Icon(Icons.notifications),
+              Center(
+                child: Text(
+                  'Mensajes',
+                  style: TextStyle(
+                      fontSize: 30.0,
+                      color: pedido.color,
+                      fontWeight: FontWeight.bold),
+                ),
+              ),
+              Center(
+                child: Container(
+                  margin:EdgeInsets.only(top: 10.0),
+                  padding: EdgeInsets.all(2),
+                  decoration: new BoxDecoration(
+                    color: Colors.red,
+                    borderRadius: BorderRadius.circular(6),
+                  ),
+                  constraints: BoxConstraints(
+                    minWidth: 14,
+                    minHeight: 14,
+                  ),
+                  child: Text(
+                    '5',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 8,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
       ),
