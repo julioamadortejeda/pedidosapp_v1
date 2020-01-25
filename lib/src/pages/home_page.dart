@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 
 //Custom imports
-import 'package:pedidosapp_v1/src/models/message.dart';
-import 'package:pedidosapp_v1/src/models/messages.dart';
 import 'package:pedidosapp_v1/src/models/pedido.dart';
 
 class HomePage extends StatelessWidget {
@@ -12,7 +10,6 @@ class HomePage extends StatelessWidget {
       fechaFin: DateTime.now().add(Duration(days: 5)),
       fechaInicio: DateTime.now());
 
-  final List<Message> messages = Messages.messages;
 
   @override
   Widget build(BuildContext context) {
@@ -61,29 +58,25 @@ class HomePage extends StatelessWidget {
   }
 
   Widget _renderPedidoCard(BuildContext context, Size size) {
-    //final size = MediaQuery.of(context).size;
-    print(size.height);
     return Container(
       padding:
           EdgeInsets.only(left: 50.0, right: 50.0, top: size.height * 0.05),
-      //color: Colors.red,
-      //margin: EdgeInsets.only(bottom: 10.0),
       height: size.height * (size.height < 600 ? 0.65 : 0.60),
       child: Card(
         elevation: 5.0,
-        //color: Colors.white,
         shape:
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
         child: InkWell(
           splashColor: pedido.color.withAlpha(100),
-          onTap: () {},
+          onTap: () {
+            Navigator.pushNamed(context, 'pedido_detail');
+          },
           child: Column(children: <Widget>[
             Container(
-              padding: EdgeInsets.only(top: size.height * 0.03),
+              padding: EdgeInsets.only(top: size.height * 0.05),
               child: Text(
                 'Pedido #${pedido.id}',
                 style: TextStyle(
-                    fontFamily: 'Dosis',
                     color: pedido.color,
                     fontSize: 30.0,
                     fontWeight: FontWeight.w400),
@@ -94,7 +87,6 @@ class HomePage extends StatelessWidget {
               child: Text(
                 pedido.estatus,
                 style: TextStyle(
-                    fontFamily: 'Dosis',
                     color: pedido.color,
                     fontSize: 40.0,
                     fontWeight: FontWeight.w600),
@@ -116,7 +108,6 @@ class HomePage extends StatelessWidget {
               child: Text(
                 'Termina en:',
                 style: TextStyle(
-                    fontFamily: 'Dosis',
                     fontSize: 24.0,
                     fontWeight: FontWeight.w300,
                     color: pedido.color),
@@ -124,9 +115,8 @@ class HomePage extends StatelessWidget {
             ),
             //SizedBox(height: size.height * 0.01,),
             Text(
-              '3D 2H 60M 53S',
+              '3D 2h 60m 53s',
               style: TextStyle(
-                  fontFamily: 'Dosis',
                   fontSize: 36.0,
                   fontWeight: FontWeight.bold,
                   color: pedido.color.withAlpha(200)),
@@ -138,8 +128,6 @@ class HomePage extends StatelessWidget {
   }
 
   Widget _renderCardMessage(BuildContext context, Size size) {
-    final size = MediaQuery.of(context).size;
-
     return Container(
       decoration: BoxDecoration(
           borderRadius: BorderRadius.vertical(top: Radius.circular(10.0)),
@@ -150,23 +138,24 @@ class HomePage extends StatelessWidget {
         borderOnForeground: false,
         child: InkWell(
           splashColor: pedido.color.withAlpha(100),
-          onTap: () {Navigator.pushNamed(context, 'messages');},
+          onTap: () {
+            Navigator.pushNamed(context, 'messages');
+          },
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              //Icon(Icons.notifications),
               Center(
                 child: Text(
                   'Mensajes',
                   style: TextStyle(
                       fontSize: 30.0,
                       color: pedido.color,
-                      fontWeight: FontWeight.bold),
+                      fontWeight: FontWeight.w600),
                 ),
               ),
               Center(
                 child: Container(
-                  margin:EdgeInsets.only(top: 10.0),
+                  margin: EdgeInsets.only(top: 8.0, left: 5.0),
                   padding: EdgeInsets.all(2),
                   decoration: new BoxDecoration(
                     color: Colors.red,
@@ -180,7 +169,7 @@ class HomePage extends StatelessWidget {
                     '5',
                     style: TextStyle(
                       color: Colors.white,
-                      fontSize: 8,
+                      fontSize: 10,
                     ),
                     textAlign: TextAlign.center,
                   ),
@@ -192,36 +181,4 @@ class HomePage extends StatelessWidget {
       ),
     );
   }
-
-  // Widget _crearLista(BuildContext context) {
-  //   return ListView.separated(
-  //     padding: const EdgeInsets.symmetric(horizontal: 8.0),
-  //     itemCount: messages.length,
-  //     itemBuilder: (BuildContext context, int index) {
-  //       return Material(
-  //         color: Colors.transparent,
-  //         child: ListTile(
-  //           title: Text('Entry ${messages[index].title}'),
-  //           subtitle: Text(messages[index].subTitle),
-  //           trailing:
-  //               Icon(Icons.keyboard_arrow_right, color: messages[index].color),
-  //           leading: ClipRRect(
-  //               borderRadius: BorderRadius.circular(10.0),
-  //               child: Image(
-  //                 height: 40.0,
-  //                 width: 40.0,
-  //                 image: AssetImage(messages[index].imageType),
-  //               )),
-  //           onTap: () {
-  //             print(messages[index].message);
-  //           },
-  //         ),
-  //       );
-  //     },
-  //     separatorBuilder: (BuildContext context, int index) => Divider(
-  //       color: Colors.transparent,
-  //       height: 0.0,
-  //     ),
-  //   );
-  // }
 }

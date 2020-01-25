@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 //Custom imports
 import 'package:pedidosapp_v1/src/pages/home_page.dart';
 import 'package:pedidosapp_v1/src/pages/messages_page.dart';
+import 'package:pedidosapp_v1/src/pages/pedido_detail_page.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -22,7 +23,8 @@ class MyApp extends StatelessWidget {
       initialRoute: 'home',
       routes: {
         'home': (BuildContext context) => HomePage(),
-        'messages': (BuildContext context) => MessagesPage()
+        'messages': (BuildContext context) => MessagesPage(),
+        'pedido_detail' : (BuildContext context)  => PedidoDetail()
       },
       theme: ThemeData(
           primarySwatch: Colors.green,
