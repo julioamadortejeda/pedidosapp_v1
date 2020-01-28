@@ -10,7 +10,6 @@ class HomePage extends StatelessWidget {
       fechaFin: DateTime.now().add(Duration(days: 5)),
       fechaInicio: DateTime.now());
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -73,7 +72,7 @@ class HomePage extends StatelessWidget {
           },
           child: Column(children: <Widget>[
             Container(
-              padding: EdgeInsets.only(top: size.height * 0.05),
+              padding: EdgeInsets.only(top: size.height * 0.03),
               child: Text(
                 'Pedido #${pedido.id}',
                 style: TextStyle(
@@ -103,6 +102,7 @@ class HomePage extends StatelessWidget {
                 fit: BoxFit.fill,
               ),
             ),
+            Expanded(child: Container()),
             Container(
               margin: EdgeInsets.only(top: size.height * 0.01),
               child: Text(
@@ -121,6 +121,7 @@ class HomePage extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                   color: pedido.color.withAlpha(200)),
             ),
+            SizedBox(height: 15.0,)
           ]),
         ),
       ),

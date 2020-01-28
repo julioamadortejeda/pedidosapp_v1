@@ -1,26 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:pedidosapp_v1/src/models/aliments.dart';
+
+//Custom imports
+import 'package:pedidosapp_v1/src/models/list_pedidos.dart';
 import 'package:pedidosapp_v1/src/pages/page.dart';
-import 'package:pedidosapp_v1/src/widgets/aliment.dart';
 import 'package:pedidosapp_v1/src/widgets/card_item.dart';
 import 'package:pedidosapp_v1/src/widgets/pager.dart';
+import 'package:pedidosapp_v1/src/widgets/pedido_widget.dart';
 
 class PedidoDetail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        child: MenuPager(children: Aliments.aliments.map(
-                (aliment) => Page(
-                      title: "HOW TO BURN OFF",
-                      background: aliment.background,
-                      icon: aliment.bottomImage,
+        child: MenuPager(children: ListPedidos.listPedidos.map(
+                (pedido) => Page(
+                      title: "TU PEDIDO",
+                      background: pedido.background,
+                      icon: null,
                       child: CardItem(
-                        child: Container(
-                          color: Colors.yellow,
-                          width: 100.0,
-                          height: 100.0,
-                        )
+                        child: PedidoWidget(pedido: pedido,)
                       ),
                     ),
               )
