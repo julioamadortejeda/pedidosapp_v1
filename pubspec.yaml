@@ -25,6 +25,8 @@ dependencies:
   cupertino_icons: ^0.1.2
   flutter_svg: ^0.13.0+1
   rxdart: ^0.23.1
+  cloud_firestore: ^0.13.2+1
+  http:
 
 dev_dependencies:
   flutter_test:

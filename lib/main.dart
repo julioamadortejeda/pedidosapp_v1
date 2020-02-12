@@ -8,6 +8,7 @@ import 'package:pedidosapp_v1/src/pages/home_page.dart';
 import 'package:pedidosapp_v1/src/pages/login_page.dart';
 import 'package:pedidosapp_v1/src/pages/messages_page.dart';
 import 'package:pedidosapp_v1/src/pages/pedido_detail_page.dart';
+import 'package:pedidosapp_v1/src/pages/test_firebase.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -24,12 +25,13 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Pedidos Ale',
-        initialRoute: 'login',
+        initialRoute: 'firetest',
         routes: {
           'login': (BuildContext context) => LoginPage(),
           'home': (BuildContext context) => HomePage(),
           'messages': (BuildContext context) => MessagesPage(),
-          'pedido_detail': (BuildContext context) => PedidoDetail()
+          'pedido_detail': (BuildContext context) => PedidoDetail(),
+          'firetest' : (BuildContext context) => TestPage()
         },
         theme: ThemeData(
             primarySwatch: Colors.pink,
