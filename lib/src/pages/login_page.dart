@@ -10,15 +10,19 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  TextEditingController emailController;
-  TextEditingController passwordController;
+  LoginBloc _bloc;
+  TextEditingController _emailController;
+  TextEditingController _passwordController;
 
   @override
   void initState() {
     super.initState();
 
-    emailController = TextEditingController();
-    passwordController = TextEditingController();
+    _bloc = BlocProvider.of<LoginBloc>(context);
+    _emailController = TextEditingController();
+    _passwordController = TextEditingController();
+    _emailController.addListener(_onEmailChanged);
+    _passwordController.addListener(_onPasswordChanged);
   }
 
   @override
@@ -109,10 +113,14 @@ class _LoginPageState extends State<LoginPage> {
                     offset: Offset(0.0, 3.0),
                     spreadRadius: 2.0)
               ]),
-          child: BlocListener<LoginBloc, LoginState>(
+          child: BlocListener<LoginBloc, BasicLoginState>(
             listener: (context, state) => _processLoginResponse(context, state),
-            child: BlocBuilder<LoginBloc, LoginState>(
-                builder: (BuildContext context, LoginState state) {
+            child: BlocBuilder<LoginBloc, BasicLoginState>(
+                builder: (BuildContext context, BasicLoginState state) {
+                  if(state is ErrorLoginState)
+                    {
+                      print('errror');
+                    }
               return Column(
                 children: <Widget>[
                   Text(
@@ -130,7 +138,7 @@ class _LoginPageState extends State<LoginPage> {
                   SizedBox(
                     height: 30.0,
                   ),
-                  if (state is LogginInState)
+                  if (state.isLoggedInProcess)
                     CircularProgressIndicator()
                   else
                     _createButtonLogin(context),
@@ -151,7 +159,7 @@ class _LoginPageState extends State<LoginPage> {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 20.0),
       child: TextField(
-        controller: emailController,
+        controller: _emailController,
         keyboardType: TextInputType.emailAddress,
         decoration: InputDecoration(
           icon: Icon(
@@ -160,10 +168,11 @@ class _LoginPageState extends State<LoginPage> {
           ),
           hintText: 'ejemplo@correo.com',
           labelText: 'Correo electrónico',
-          counterText: emailController.text,
-          //errorText: snapshot.error,
+          counterText: _emailController.text,
+          errorText:  _bloc.state.isEmailValid ? null : 'Email no valido.',
         ),
-        onChanged: (value) => null,
+        onChanged: (value) => { _bloc.add(EmailChanged(email: value))},
+        
       ),
     );
   }
@@ -172,16 +181,16 @@ class _LoginPageState extends State<LoginPage> {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 20.0),
       child: TextField(
-        controller: passwordController,
+        controller: _passwordController,
         obscureText: true,
         keyboardType: TextInputType.emailAddress,
         decoration: InputDecoration(
           icon: Icon(Icons.lock_open, color: Colors.pink),
           labelText: 'Contraseña',
-          counterText: passwordController.text,
-          // errorText: snapshot.error
+          counterText: _passwordController.text,
+          errorText: _bloc.state.isPasswordValid ? null : 'Más de 6 caracteres. '
         ),
-        onChanged: null,
+        onChanged: (value) => _bloc.add(PasswordChanged(password: value)),
       ),
     );
   }
@@ -201,22 +210,35 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   _login(BuildContext context) {
-    BlocProvider.of<LoginBloc>(context)
-        .add(DoLoginEvent(emailController.text, passwordController.text));
+    _bloc.add(DoLoginEvent(_emailController.text, _passwordController.text));
   }
 
   void _showError(BuildContext context, String message) {
     Scaffold.of(context).showSnackBar(SnackBar(content: Text(message)));
   }
 
-  void _processLoginResponse(BuildContext context, LoginState state) {
+  void _processLoginResponse(BuildContext context, BasicLoginState state) {
     if (state is ErrorLoginState) {
       _showError(context, state.message);
+      return;
     }
-    if (state is LoggedInState) {
+
+    if (!state.isEmailValid || !state.isPasswordValid) {
+      return;
+    }
+
+    if (state.token != '') {
       FocusScope.of(context).requestFocus(
           FocusNode()); // previene que el teclado se quede abierto y muestre error de overflow pixels
       Navigator.of(context).pushReplacementNamed('home');
     }
+  }
+
+  void _onEmailChanged() {
+    _bloc.add(EmailChanged(email: _emailController.text));
+  }
+
+  void _onPasswordChanged() {
+    _bloc.add(PasswordChanged(password: _passwordController.text));
   }
 }
