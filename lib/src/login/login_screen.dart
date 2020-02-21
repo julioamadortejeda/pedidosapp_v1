@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:pedidosapp_v1/src/login/bloc/login_bloc.dart';
-import 'package:pedidosapp_v1/src/login/bloc/login_form.dart';
+import 'package:pedidosapp_v1/src/pages/login_page_new.dart';
 import 'package:pedidosapp_v1/src/repository/user_repository.dart';
 
 
@@ -17,10 +17,9 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Login')),
       body: BlocProvider<LoginBloc>(
         create: (context) => LoginBloc(userRepository: _userRepository),
-        child: LoginForm(userRepository: _userRepository),
+        child: LoginPage(userRepository: _userRepository),
       ),
     );
   }

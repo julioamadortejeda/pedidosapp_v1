@@ -82,9 +82,9 @@ class LoginState {
     return copyWith(
       isEmailValid: isEmailValid ?? this.isEmailValid,
       isPasswordValid: isPasswordValid ?? this.isPasswordValid,
-      isSubmitting: false,
-      isSuccess: false,
-      isFailure: false,
+      isSubmitting: this.isSubmitting,
+      isSuccess: this.isSuccess,
+      isFailure: this.isFailure,
     );
   }
 

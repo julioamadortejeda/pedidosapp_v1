@@ -2,13 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:bloc/bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pedidosapp_v1/src/login/bloc/login_bloc.dart';
 
 //Custom imports
-//import 'package:pedidosapp_v1/src/bloc/provider.dart';
-
 import 'package:pedidosapp_v1/src/pages/home_page.dart';
-import 'package:pedidosapp_v1/src/pages/messages_page.dart';
-import 'package:pedidosapp_v1/src/pages/pedido_detail_page.dart';
+
 import 'package:pedidosapp_v1/src/pages/splash_screen_page.dart';
 
 import 'package:pedidosapp_v1/src/login/login_screen.dart';
@@ -53,9 +51,7 @@ class MyApp extends StatelessWidget {
           }
 
           if (state is Unauthenticated) {
-            return LoginScreen(
-              userRepository: _userRepository,
-            );
+            return LoginScreen(userRepository: _userRepository);
           }
 
           if (state is Authenticated) {
@@ -63,6 +59,10 @@ class MyApp extends StatelessWidget {
           }
         },
       ),
+      theme: ThemeData(
+          primarySwatch: Colors.pink,
+          //splashColor: Colors.pink,
+          fontFamily: 'Dosis'),
     );
   }
   // @override

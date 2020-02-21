@@ -28,11 +28,11 @@ class UserRepository {
     return null;
   }
 
-  Future<void> signInWithCredentials(String email, String password) {
+  Future<void> signInWithCredentials(String email, String password) async {
     // return .signInWithEmailAndPasswor_firebaseAuthd(
     //   email: email,
     //   password: password,
     // );
-    Future.delayed(Duration(seconds: 3));
+   await Future.delayed(Duration(seconds: 3));
   }
 }
